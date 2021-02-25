@@ -6,8 +6,12 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { CandidateModel } from '@models/candidate.model';
+import { UtilsService } from '@root/shared/utilities/utils.service';
 import { CandidatesService } from '@services/candidates.service';
 import { MessageService } from '@services/message.service';
+import { CandidatesModule } from './candidates.module';
 
 @Component({
   selector: 'app-candidates',
@@ -17,15 +21,45 @@ import { MessageService } from '@services/message.service';
 export class CandidatesComponent implements OnInit {
   public form!: FormGroup;
   control!: AbstractControl;
+  idCandidate!: number;
+  candidate!: CandidateModel;
   constructor(
     private fb: FormBuilder,
     private candidateService: CandidatesService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private route: ActivatedRoute,
+    private utilService: UtilsService
   ) {
     this.createForm();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.idCandidate = this.route.snapshot.params.id;
+    this.buscarCandidate();
+  }
+  buscarCandidate() {
+    if (this.idCandidate) {
+      this.utilService.loading();
+      this.candidateService
+        .searchCandidateById$(this.idCandidate)
+        .subscribe((response: any) => {
+          if (response.success) {
+            this.utilService.loading(false);
+            this.candidate = response.data;
+            this.form.get('name')?.setValue(this.candidate.name);
+            this.form.get('surname')?.setValue(this.candidate.surname);
+            this.form.get('email')?.setValue(this.candidate.email);
+            this.form.get('phone')?.setValue(this.candidate.phone);
+            this.form
+              .get('date_interview')
+              ?.setValue(this.candidate.date_interview);
+            this.form.get('rating')?.setValue(this.candidate.rating);
+          }
+        });
+        this.utilService.loading(false);
+    }
+  }
+
   createForm() {
     this.form = this.fb.group({
       name: new FormControl('', Validators.required),
@@ -57,16 +91,44 @@ export class CandidatesComponent implements OnInit {
 
   save() {
     let values = this.form.value;
-    console.log(values);
-    this.candidateService
-      .createCandidate$(values)
-      .subscribe((response: any) => {
-        if (response.success) {
-          this.messageService.showCustom(response.message[0], null, 'success');
-          this.form.reset();
-        } else {
-          this.messageService.showCustom(response.message[0], null, 'error');
-        }
-      });
+
+    if (this.idCandidate) {
+      this.utilService.loading();
+      values.id = this.idCandidate;
+      this.candidateService
+        .updateCandidate$(values)
+        .subscribe((response: any) => {
+          if (response.success) {
+            this.utilService.loading(false);
+            this.messageService.showCustom(
+              response.message[0],
+              null,
+              'success'
+            );
+            this.form.reset();
+          } else {
+            this.utilService.loading(false);
+            this.messageService.showCustom(response.message[0], null, 'error');
+          }
+        });
+    } else {
+      this.candidateService
+        .createCandidate$(values)
+        .subscribe((response: any) => {
+          this.utilService.loading();
+          if (response.success) {
+            this.utilService.loading(false);
+            this.messageService.showCustom(
+              response.message[0],
+              null,
+              'success'
+            );
+            this.form.reset();
+          } else {
+            this.utilService.loading(false);
+            this.messageService.showCustom(response.message[0], null, 'error');
+          }
+        });
+    }
   }
 }

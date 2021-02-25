@@ -3,36 +3,39 @@
   <div class="row search mb-2 text-center">
     <div class="col-sm-2 align-middle">
       Name
-      <input type="text" class="form-control">
+      <input type="text"   class="form-control"placeholder="Enter to search" #inputName (keyup.enter)="searchByFieldValue('name',inputName.value)">
     </div>
     <div class="col-sm-2 align-middle">
       Surname
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" placeholder="Enter to search" #inputSurname (keyup.enter)="searchByFieldValue('surname',inputSurname.value)">
     </div>
     <div class="col-sm-2 align-middle">
       Email
-      <input type="text" class="form-control">
+      <input type="text" class="form-control"  placeholder="Enter to search" #inputEmail (keyup.enter)="searchByFieldValue('email',inputEmail.value)">
     </div>
     <div class="col-sm-2 align-middle">
       Phone
-      <input type="text" class="form-control">
+      <input type="text" class="form-control"  placeholder="Enter to search" #inputPhone (keyup.enter)="searchByFieldValue('phone',inputPhone.value)">
     </div>
     <div class="col-sm-2 align-middle">
       Rating from 1 to 10
-      <input type="text" class="form-control">
+      <input type="text" class="form-control" placeholder="Enter to search" #inputRating (keyup.enter)="searchByFieldValue('rating',inputRating .value)">
     </div>
   </div>
   <div class="row">
-    <div class="col-sm-6 text-center d-flex inline text-center  align-middle">
+    <div class="col-sm-6 text-center d-flex inline text-center justify-content-end">
 
       <label for="" class="form-label  align-middle">Date of interview:</label>
       <div class="col-sm-4">
         from
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" #dateFrom >
       </div>
       <div class="col-sm-4">
         to
-        <input type="date" class="form-control">
+        <input type="date" class="form-control" #dateTo>
+      </div>
+      <div class="col-sm-2 ">
+        <button type="button" (click)="searchByDate(dateFrom.value , dateTo.value)" class="btn btn-success mt-4">Search by Date</button>
       </div>
     </div>
   </div>
@@ -87,8 +90,8 @@
     </div>
     <div class="col-sm-2 text-center">
       <!-- <button  mat-fab color="primary" aria-label="Example icon button with a delete icon">Asignar</button> -->
-      <button type="button" title="edit" class="btn btn-primary btn-sm round far fa-edit "></button>
-      <button type="button" title="Delete" class="btn btn-danger  btn-small round fas fa-trash-alt mx-1"></button>
+      <button type="button" title="edit" routerLink="../candidates/{{candidate.id}}" class="btn btn-primary btn-sm round far fa-edit "></button>
+      <button type="button" title="Delete" (click)="deleteCandidate(candidate)" class="btn btn-danger  btn-small round fas fa-trash-alt mx-1"></button>
 
     </div>
   </div>

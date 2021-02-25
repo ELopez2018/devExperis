@@ -71,6 +71,14 @@ export class CandidatesService {
       })
     );
   }
+  searchCandidateById$(id: number): Observable<CandidateModel> {
+    return this.http.get<CandidateModel>(this.urlApi + `/candidates/${id}`, ).pipe(
+      tap((resp) => {
+        console.log('response: ', resp);
+        return resp;
+      })
+    );
+  }
   searchCandidate$(field: string, value: string): Observable<CandidateModel> {
     return this.http.get<CandidateModel>(this.urlApi + `/${field}/${value}/candidates/`, ).pipe(
       tap((resp) => {
