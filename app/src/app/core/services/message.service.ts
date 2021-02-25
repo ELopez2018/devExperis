@@ -37,13 +37,13 @@ export class MessageService {
                 timeDuration = 5000;
                 break;
             case "success":
-                timeDuration = 2000;
+                timeDuration = 3000;
                 break;
             case "warn":
                 timeDuration = 5000;
                 break;
             default:
-                timeDuration = 2000;
+                timeDuration = 3000;
         }
         this.snackBar.openFromComponent(NotifierComponent, {
             data: {

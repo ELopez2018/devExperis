@@ -23,4 +23,6 @@ Route::post('/candidates', 'CandidateController@store');
 Route::put('/candidates', 'CandidateController@update');
 Route::get('/candidates/{id}', 'CandidateController@show');
 Route::delete('/candidates/{id}', 'CandidateController@destroy');
+Route::get('/{field}/{value}/candidates', 'CandidateController@search');
+Route::get('/{from}/{to}/candidates/bydate', 'CandidateController@byDate');
 

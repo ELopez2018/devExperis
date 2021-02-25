@@ -12,6 +12,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },
       { path: 'candidates', loadChildren: () => import('../components/candidates/candidates.module').then(m => m.CandidatesModule) },
+      { path: 'candidates-list', loadChildren: () => import('../components/candidates-list/candidates-list.module').then(m => m.CandidatesListModule) },
       { path: '**',  component: DashboardComponent  },
     ]
   },

@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  API_URL:'https://dev.miasesorvial.com/api/v1/',
-  STORAGE:'https://dev.miasesorvial.com/laravel/public/storage/'
+  API_URL:'http://experis.test/api'
 };
 
 /*

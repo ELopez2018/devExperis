@@ -12,13 +12,12 @@ import { environment } from "@environments/environment";
 export class HeaderComponent implements OnInit {
   subs: Subscription = new Subscription();
   user: any;
-  storage = environment.STORAGE;
   constructor(private authfacade: AuthFacadeService) { }
   ngOnInit(): void {
     this.obtenerUsuario()
   }
   obtenerUsuario() {
-    this.authfacade.getCurrentUser$().subscribe(user => this.user = user )
+
   }
   logout(): void {
     this.authfacade.logout();

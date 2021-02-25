@@ -5,20 +5,21 @@ import { AuthGuard } from '@services/auth/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/auth',
+    redirectTo: '/main',
     pathMatch: 'full',
   },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  },
+  // {
+  //   path: 'auth',
+  //   loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  // },
   {
     path: 'main',
-    loadChildren: () => import('./main/main.module').then((m) => m.MainModule),  canLoad: [AuthGuard]
+    loadChildren: () => import('./main/main.module').then((m) => m.MainModule)
   },
 
 
-  { path: '**', redirectTo: '/auth', },
+
+  { path: '**', redirectTo: '/main', },
 ];
 
 @NgModule({

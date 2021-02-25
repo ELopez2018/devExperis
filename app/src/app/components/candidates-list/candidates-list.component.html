@@ -1,0 +1,95 @@
+<div class="container-fluid">
+  <label for="">Searchs</label>
+  <div class="row search mb-2 text-center">
+    <div class="col-sm-2 align-middle">
+      Name
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-sm-2 align-middle">
+      Surname
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-sm-2 align-middle">
+      Email
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-sm-2 align-middle">
+      Phone
+      <input type="text" class="form-control">
+    </div>
+    <div class="col-sm-2 align-middle">
+      Rating from 1 to 10
+      <input type="text" class="form-control">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-6 text-center d-flex inline text-center  align-middle">
+
+      <label for="" class="form-label  align-middle">Date of interview:</label>
+      <div class="col-sm-4">
+        from
+        <input type="date" class="form-control">
+      </div>
+      <div class="col-sm-4">
+        to
+        <input type="date" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row header mb-2 text-center">
+    <div class="col-sm-1 align-middle">
+      <!-- <label for="requestName">Nombre: </label> -->
+      <span id="requestName"> Name </span>
+    </div>
+    <div class="col-sm-1 align-middle">
+      <!-- <label for="requestMail">Correo:</label> -->
+      <span id="requestaMail align-middle">
+        Surname
+      </span>
+    </div>
+    <div class="col-sm-2 align-middle">
+      Email
+    </div>
+    <div class="col-sm-2 align-middle">
+      Phone
+    </div>
+    <div class="col-sm-2 align-middle">
+      Date of interview
+    </div>
+    <div class="col-sm-2 align-middle">
+      Rating from 1 to 10
+    </div>
+    <div class="col-sm-2">
+      Actions
+    </div>
+  </div>
+
+  <div class="row mt-2 sombra" *ngFor="let candidate of candidatesAll">
+    <div class="col-sm-1  text-center ">
+      <!-- <label for="requestName">Nombre: </label> -->
+      {{ candidate.name }}
+    </div>
+    <div class="col-sm-1 text-center">
+      <!-- <label for="requestMail">Correo:</label> -->
+      {{ candidate.surname }}
+    </div>
+    <div class="col-sm-2 text-center">
+      {{ candidate.email }}
+    </div>
+    <div class="col-sm-2 text-center">
+      {{ candidate.phone }}
+    </div>
+    <div class="col-sm-2 text-center">
+      {{ candidate.date_interview }}
+    </div>
+    <div class="col-sm-2 text-center">
+      {{ candidate.rating }}
+    </div>
+    <div class="col-sm-2 text-center">
+      <!-- <button  mat-fab color="primary" aria-label="Example icon button with a delete icon">Asignar</button> -->
+      <button type="button" title="edit" class="btn btn-primary btn-sm round far fa-edit "></button>
+      <button type="button" title="Delete" class="btn btn-danger  btn-small round fas fa-trash-alt mx-1"></button>
+
+    </div>
+  </div>
+</div>

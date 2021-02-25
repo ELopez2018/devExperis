@@ -2,27 +2,27 @@
   <h4 class="m-b-0 text-white">Register my candidates</h4>
 </div>
 <div class="card-body">
-  <form action="#" class="form-horizontal">
+  <form [formGroup]="form"  class="form-horizontal">
     <div class="form-body">
       <h3 class="box-title">Personal information</h3>
       <hr class="m-t-0 m-b-40">
       <div class="row">
         <div class="col-md-6">
-          <div class="form-group row">
+          <div class="{{ name.invalid && (name.dirty || name.touched) ? 'form-group has-danger row' : 'form-group row' }}">
             <label class="control-label text-right col-md-3">Name</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" placeholder="John doe">
-              <small class="form-control-feedback"> This is inline help </small>
+              <input type="text" class="form-control form-control-danger" formControlName="name" placeholder="John doe">
+              <small *ngIf="name.invalid && (name.dirty || name.touched)" class="form-control-feedback"> This field has error. </small>
             </div>
           </div>
         </div>
         <!--/span-->
         <div class="col-md-6">
-          <div class="form-group has-danger row">
+          <div class="{{ surname.invalid && (surname.dirty || surname.touched) ? 'form-group has-danger row' : 'form-group row' }}">
             <label class="control-label text-right col-md-3">Surname</label>
             <div class="col-md-9">
-              <input type="text" class="form-control form-control-danger" placeholder="12n">
-              <small class="form-control-feedback"> This field has error. </small>
+              <input type="text" formControlName="surname" class="form-control form-control-danger" placeholder="surname">
+              <small *ngIf="surname.invalid && (surname.dirty || surname.touched)"  class="form-control-feedback"> This field has error. </small>
             </div>
           </div>
         </div>
@@ -31,21 +31,21 @@
 
       <div class="row">
         <div class="col-md-6">
-          <div class="form-group row">
+          <div class="{{ email.invalid && (email.dirty || email.touched) ? 'form-group has-danger row' : 'form-group row' }}">
             <label class="control-label text-right col-md-3">Email</label>
             <div class="col-md-9">
-              <input type="text" class="form-control" placeholder="John doe">
-              <small class="form-control-feedback"> This is inline help </small>
+              <input type="email"formControlName="email"  class="form-control form-control-danger" placeholder="email@mail.com">
+              <small *ngIf="email.invalid && (email.dirty || email.touched)" class="form-control-feedback"> This field has error. </small>
             </div>
           </div>
         </div>
         <!--/span-->
         <div class="col-md-6">
-          <div class="form-group has-danger row">
+          <div class="{{ phone.invalid && (phone.dirty || phone.touched) ? 'form-group has-danger row' : 'form-group row' }}">
             <label class="control-label text-right col-md-3">Phone</label>
             <div class="col-md-9">
-              <input type="text" class="form-control form-control-danger" placeholder="(XXX) XXX-XXXX-XXX">
-              <small class="form-control-feedback"> This field has error. </small>
+              <input type="phone" formControlName="phone" class="form-control form-control-danger" placeholder="(XXX) XXX-XXXX-XXX">
+              <small *ngIf="phone.invalid && (phone.dirty || phone.touched)" class="form-control-feedback"> This field has error. </small>
             </div>
           </div>
         </div>
@@ -56,19 +56,21 @@
       <div class="row">
         <!--/span-->
         <div class="col-md-6">
-          <div class="form-group row">
+          <div class="{{ date_interview.invalid && (date_interview.dirty || date_interview.touched) ? 'form-group has-danger row' : 'form-group row' }}">
             <label class="control-label text-right col-md-3">Date of interview</label>
             <div class="col-md-9">
-              <input type="date" class="form-control" placeholder="dd/mm/yyyy">
+              <input type="date" formControlName="date_interview" class="form-control form-control-danger" placeholder="dd/mm/yyyy">
+              <small *ngIf="date_interview.invalid && (date_interview.dirty || date_interview.touched)" class="form-control-feedback"> This field has error. </small>
             </div>
           </div>
         </div>
 
         <div class="col-md-6">
-          <div class="form-group row">
+          <div class="{{ rating.invalid && (rating.dirty || rating.touched) ? 'form-group has-danger row' : 'form-group row' }}">
             <label class="control-label text-right col-md-3">Rating</label>
             <div class="col-md-9">
-              <input type="number" class="form-control" value=0 min=0 max=10  placeholder="0">
+              <input type="number"  formControlName="rating" class="form-control form-control-danger" value=0 min=0 max=10  placeholder="0">
+              <small *ngIf="rating.invalid && (rating.dirty || rating.touched)" class="form-control-feedback"> This field has error. </small>
             </div>
           </div>
         </div>
@@ -82,7 +84,7 @@
         <div class="col-md-6">
           <div class="row">
             <div class="col-md-offset-3 col-md-9">
-              <button type="submit" class="btn btn-success">Save</button>
+              <button type="submit" [disabled]="form.invalid" class="btn btn-success" (click)="save()">Save</button>
               <button type="button" class="btn btn-inverse">Cancel</button>
             </div>
           </div>

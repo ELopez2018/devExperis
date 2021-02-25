@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\candidate;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 
 class CandidateController extends Controller
@@ -98,5 +99,23 @@ class CandidateController extends Controller
             $this->_response = ['success' => true, 'message' => ['Candidate successfully deleted'], 'data' => $candidate];
         }
         return response()->json($this->_response, 200);
+    }
+
+    public function search($field,$value) {
+
+        $resultados = DB::table('candidates')
+                            ->where($field,'like', '%' . $value . '%')
+                            ->get();
+        return $resultados;
+
+    }
+    public function byDate($from,$to) {
+
+        $resultados = DB::table('candidates')
+                            ->where('date_interview','>=', $from)
+                            ->where('date_interview','<=', $to)
+                            ->get();
+        return $resultados;
+
     }
 }
